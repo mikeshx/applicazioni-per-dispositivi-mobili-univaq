@@ -1,0 +1,99 @@
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <h1 class="heading"><i class="fa-solid fa-location-pin"></i>🚩 Create Account<br><br></h1>
+    <p class="para">Sign up to get started!</p>
+    <form *ngIf="!isSuccessful"
+          name="form"
+          (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm"
+          novalidate>
+
+      <ion-item lines="none" class="ion-item form-group">
+        <fieldset class="input-item">
+          <legend>Username</legend>
+          <ion-input type="text"
+                     class="form-control"
+                     name="username"
+                     placeholder="Username"
+                     [(ngModel)]="form.username"
+                     required
+                     minlength="3"
+                     maxlength="20"
+                     #username="ngModel"
+                     [ngClass]="{ 'is-invalid': f.submitted && username.errors }"></ion-input>
+        </fieldset>
+      </ion-item>
+      <!-- Username Errors -->
+      <div class="invalid-feedback ion-text-center" *ngIf="username.errors && f.submitted">
+        <ion-note *ngIf="username.errors['required']" slot="error" color="danger">Enter a username</ion-note>
+        <ion-note *ngIf="username.errors['minlength']" slot="error" color="danger">Username must be at least 3
+          characters
+        </ion-note>
+        <ion-note *ngIf="username.errors['maxlength']" slot="error" color="danger">Username must be at most 20
+          characters
+        </ion-note>
+      </div>
+
+
+      <ion-item lines="none" class="ion-item form-group">
+        <fieldset class="input-item">
+          <legend>Email</legend>
+          <ion-input type="email"
+                     class="form-control"
+                     name="email"
+                     placeholder="example@email.com"
+                     [(ngModel)]="form.email"
+                     required
+                     email
+                     #email="ngModel"
+                     [ngClass]="{ 'is-invalid': f.submitted && email.errors }">
+
+          </ion-input>
+        </fieldset>
+      </ion-item>
+      <!-- Email errors -->
+      <div class="invalid-feedback ion-text-center" *ngIf="email.errors && f.submitted">
+        <ion-note *ngIf="email.errors['required']" slot="error" color="danger">Email is required</ion-note>
+        <ion-note *ngIf="email.errors['email']" slot="error" color="danger">Enter a valid email address</ion-note>
+      </div>
+
+      <ion-item lines="none" class="ion-item form-group">
+        <fieldset class="input-item">
+          <legend>Password</legend>
+          <ion-input
+            type="password"
+            class="form-control"
+            name="password"
+            placeholder="*******"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && password.errors }"></ion-input>
+        </fieldset>
+      </ion-item>
+      <!-- Password errors -->
+      <div class="invalid-feedback ion-text-center" *ngIf="password.errors && f.submitted">
+        <ion-note *ngIf="password.errors['required']" slot="error" color="danger">Enter a password</ion-note>
+        <ion-note *ngIf="password.errors['minlength']" slot="error" color="danger">Password must be at least 6
+          characters</ion-note>
+      </div>
+
+      <p class="signup-text">I'm already a member&nbsp;<a href="/login">Sign In?</a></p>
+      <ion-button type="submit" class="login-button form-group" expand="block">Sign Up</ion-button>
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        Signup failed!<br/>{{ errorMessage }}
+      </div>
+
+    </form>
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Your registration is successful!
+    </div>
+  </div>
+
+</ion-content>
+<ion-footer color="white">
+  <ion-toolbar>
+    <p class="copyright">Much ❤️ to @iladilo for the emotional and technical support</p>
+  </ion-toolbar>
+</ion-footer>
