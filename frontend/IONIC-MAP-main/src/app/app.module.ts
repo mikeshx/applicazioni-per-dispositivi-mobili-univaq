@@ -20,7 +20,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {RegisterPageComponent} from "./register-page/register-page.component";
+
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -32,8 +32,7 @@ import {RegisterPageComponent} from "./register-page/register-page.component";
     ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
-    BoardUserComponent,
-    RegisterPageComponent  ],
+    BoardUserComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
 

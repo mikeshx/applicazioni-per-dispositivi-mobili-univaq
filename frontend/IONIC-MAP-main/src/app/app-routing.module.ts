@@ -7,7 +7,7 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {RegisterPageComponent} from "./register-page/register-page.component";
+
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 
@@ -20,7 +20,6 @@ const routes: Routes = [
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  {path: 'register-page', component: RegisterPageComponent},
   {
     path: 'test-page',
     loadChildren: () => import('./test-page/test-page.module').then( m => m.TestPagePageModule)

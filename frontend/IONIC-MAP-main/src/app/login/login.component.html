@@ -1,35 +1,39 @@
-<div class="col-md-12">
-  <div class="card card-container">
-    <img
-      id="profile-img"
-      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-      class="profile-img-card"
-    />
-    <form
-      *ngIf="!isLoggedIn"
-      name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
-      #f="ngForm"
-      novalidate
-    >
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="form.username"
-          required
-          #username="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && username.errors }"
-        />
-        <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
-          Username is required!
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
+<!-- Login Page -->
+<div class="container">
+  <h1 class="heading">🚀 Welcome<br><br></h1>
+  <p class="para">Sign in to continue!</p>
+
+  <form *ngIf="!isLoggedIn"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate>
+
+    <ion-item lines="none" class="ion-item">
+      <fieldset  class="input-item">
+        <legend>Username</legend>
+        <ion-input type="text"
+                   class="form-control"
+                   name="username"
+                   placeholder="example"
+                   [(ngModel)]="form.username"
+                   required
+                   #username="ngModel"
+                   [ngClass]="{ 'is-invalid': f.submitted && username.errors } ">
+        </ion-input>
+      </fieldset>
+    </ion-item>
+
+    <!-- Username errors -->
+    <div class="invalid-feedback ion-text-center" *ngIf="username.errors && f.submitted">
+      <ion-note *ngIf="username.errors['required']" slot="error" color="danger">Enter a username</ion-note>
+    </div>
+
+    <ion-item lines="none" class="ion-item">
+      <fieldset class="input-item">
+        <legend>Password</legend>
+
+        <ion-input
           type="password"
           class="form-control"
           name="password"
@@ -37,29 +41,34 @@
           required
           minlength="6"
           #password="ngModel"
-          [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
-        />
-        <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
-          <div *ngIf="password.errors['required']">Password is required</div>
-          <div *ngIf="password.errors['minlength']">
-            Password must be at least 6 characters
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary btn-block">
-          Login
-        </button>
-      </div>
-      <div class="form-group">
-        <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger" role="alert">
-          Login failed: {{ errorMessage }}
-        </div>
-      </div>
-    </form>
+          [ngClass]="{ 'is-invalid': f.submitted && password.errors }">
+        </ion-input>
+      </fieldset>
+    </ion-item>
 
-    <div class="alert alert-success" *ngIf="isLoggedIn">
-      Logged in as {{ roles }}.
+    <!-- Password Errors -->
+    <div class="invalid-feedback ion-text-center" *ngIf="password.errors && f.submitted">
+      <ion-note *ngIf="password.errors['required']" slot="error" color="danger">Enter a password</ion-note>
+      <ion-note *ngIf="password.errors['minlength']" slot="error" color="danger">Password must be at least 6
+        characters</ion-note>
     </div>
+
+    <p class="forget-text"><a>Forgot Password?</a></p>
+    <p class="signup-text">I'm a new user&nbsp;<a href="/register">Sign Up?</a></p>
+    <ion-button type="submit" class="login-button" expand="block">Login</ion-button>
+    <ion-button class="google-button" expand="block" color="light"><ion-icon name="logo-google"></ion-icon>&nbsp;&nbsp;Google Signin</ion-button>
+
+    <!-- General Errors TODO: i messaggi di errore usano ancora bootstrap!!! -->
+    <div class="form-group">
+      <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger" role="alert">
+        Login failed: {{ errorMessage }}
+      </div>
+    </div>
+  </form>
+  <!-- Logged message TODO: adattare anche questo -->
+  <div class="alert alert-success" *ngIf="isLoggedIn">
+    Logged in as {{ roles }}.
   </div>
+
 </div>
+
